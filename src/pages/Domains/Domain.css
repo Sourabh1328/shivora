@@ -1,0 +1,641 @@
+* {
+  box-sizing: border-box;
+}
+
+.domains-page {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #0b1f33;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.domains-navbar {
+  height: 76px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-bottom: 1px solid #e8edf3;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.domains-logo {
+  display: flex;
+  align-items: center;
+  color: #071b2e;
+  text-decoration: none;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.domains-logo b {
+  color: #087ff5;
+}
+
+.domains-navbar nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.domains-navbar nav a,
+.domains-nav-actions a {
+  color: #334155;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.domains-navbar nav a:hover,
+.domains-nav-actions a:hover {
+  color: #087ff5;
+}
+
+.domains-navbar nav a.active {
+  color: #087ff5;
+}
+
+.domains-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cart-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border: 1px solid #dbe5ef;
+  border-radius: 7px;
+}
+
+.cart-button:hover {
+  border-color: #087ff5;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.domains-hero {
+  padding: 100px 20px 90px;
+  text-align: center;
+  background: radial-gradient(
+    circle at 50% 5%,
+    #eaf5ff 0%,
+    #ffffff 58%
+  );
+}
+
+.domains-hero-content {
+  max-width: 900px;
+  margin: auto;
+}
+
+.domains-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #cfe5fb;
+  border-radius: 30px;
+  background: #f4faff;
+  color: #087ff5;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.domains-hero h1 {
+  margin: 25px 0 18px;
+  color: #071b2e;
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -3px;
+}
+
+.domains-hero h1 span {
+  display: block;
+  color: #087ff5;
+}
+
+.domains-hero p {
+  max-width: 650px;
+  margin: 0 auto 35px;
+  color: #64748b;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.domains-search {
+  max-width: 720px;
+  margin: auto;
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #d9e3ed;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(18, 75, 120, 0.12);
+}
+
+.domains-search svg {
+  margin-left: 13px;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.domains-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  padding: 14px 5px;
+  color: #0b1f33;
+  background: #ffffff;
+  font-size: 15px;
+}
+
+.domains-search input::placeholder {
+  color: #94a3b8;
+}
+
+.domains-search button {
+  border: none;
+  background: #087ff5;
+  color: #ffffff;
+  padding: 14px 22px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.domains-search button:hover {
+  background: #066bd0;
+}
+
+.popular-domains {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.popular-domains b {
+  color: #087ff5;
+}
+
+/* =========================
+   DOMAIN SEARCH RESULT
+========================= */
+
+.domain-result {
+  max-width: 720px;
+  margin: 22px auto 0;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid #dfe8f1;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(18, 75, 120, 0.1);
+}
+
+.domain-result.available {
+  border-color: #b7e4c7;
+}
+
+.domain-result.available > svg {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.domain-result.unavailable {
+  border-color: #fecaca;
+}
+
+.domain-result.unavailable > svg,
+.domain-result.error > svg {
+  color: #dc2626;
+  flex-shrink: 0;
+}
+
+.domain-result.error {
+  justify-content: center;
+  color: #dc2626;
+}
+
+.result-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.result-info strong {
+  color: #071b2e;
+  font-size: 16px;
+}
+
+.result-info span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.domain-result.available .result-info span {
+  color: #16a34a;
+}
+
+.result-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.result-price strong {
+  color: #071b2e;
+  font-size: 21px;
+}
+
+.result-price span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.add-cart-button,
+.try-again-button {
+  border: none;
+  border-radius: 7px;
+  padding: 11px 15px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.add-cart-button {
+  background: #087ff5;
+  color: #ffffff;
+}
+
+.add-cart-button:hover {
+  background: #066bd0;
+}
+
+.try-again-button {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.try-again-button:hover {
+  background: #e2e8f0;
+}
+
+/* =========================
+   PRICING
+========================= */
+
+.domain-pricing {
+  padding: 90px 7%;
+  background: #f8fafc;
+}
+
+.domains-section-heading {
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.domains-section-heading p {
+  margin: 0;
+  color: #087ff5;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.domains-section-heading h2 {
+  margin: 10px 0;
+  color: #071b2e;
+  font-size: 36px;
+  letter-spacing: -1px;
+}
+
+.domains-section-heading span {
+  color: #64748b;
+  font-size: 15px;
+}
+
+.domain-cards {
+  max-width: 1150px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.domain-card {
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  transition: 0.25s ease;
+}
+
+.domain-card:hover {
+  transform: translateY(-6px);
+  border-color: #b9dcfb;
+  box-shadow: 0 15px 35px rgba(18, 75, 120, 0.1);
+}
+
+.domain-card.featured {
+  border-color: #087ff5;
+  box-shadow: 0 10px 30px rgba(8, 127, 245, 0.08);
+}
+
+.domain-extension {
+  color: #087ff5;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.domain-card h3 {
+  min-height: 58px;
+  margin: 20px 0;
+  color: #334155;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.domain-price {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 25px;
+}
+
+.domain-price strong {
+  color: #071b2e;
+  font-size: 30px;
+}
+
+.domain-price span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.domain-card button {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 7px;
+  background: #087ff5;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.domain-card button:hover {
+  background: #066bd0;
+}
+
+/* =========================
+   TRUST
+========================= */
+
+.domain-trust {
+  max-width: 1000px;
+  margin: 70px auto;
+  padding: 0 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.trust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 25px;
+  border: 1px solid #e5eaf0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.trust-item svg {
+  color: #087ff5;
+  flex-shrink: 0;
+}
+
+.trust-item h3 {
+  margin: 0 0 7px;
+  color: #071b2e;
+  font-size: 17px;
+}
+
+.trust-item p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================
+   CTA
+========================= */
+
+.domains-cta {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 70px 25px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    #071b2e,
+    #0b4e91
+  );
+  border-radius: 20px;
+  color: #ffffff;
+}
+
+.domains-cta h2 {
+  margin: 0 0 12px;
+  font-size: 36px;
+}
+
+.domains-cta p {
+  margin: 0 0 28px;
+  color: #cbdff4;
+}
+
+.domains-cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 23px;
+  background: #ffffff;
+  color: #087ff5;
+  border-radius: 7px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.domains-footer {
+  padding: 45px 20px;
+  text-align: center;
+  border-top: 1px solid #e5eaf0;
+  background: #ffffff;
+}
+
+.domains-footer-logo {
+  color: #071b2e;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.domains-footer p {
+  margin: 10px 0;
+  color: #087ff5;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.domains-footer span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .domains-navbar {
+    padding: 0 4%;
+  }
+
+  .domains-navbar nav {
+    display: none;
+  }
+
+  .domain-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .domains-navbar {
+    height: 68px;
+  }
+
+  .domains-nav-actions > a:first-child {
+    display: none;
+  }
+
+  .domains-hero {
+    padding: 70px 18px;
+  }
+
+  .domains-hero h1 {
+    font-size: 44px;
+    letter-spacing: -2px;
+  }
+
+  .domains-hero p {
+    font-size: 16px;
+  }
+
+  .domains-search {
+    flex-wrap: wrap;
+  }
+
+  .domains-search input {
+    min-width: 150px;
+  }
+
+  .domains-search button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .popular-domains {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .domain-result {
+    flex-wrap: wrap;
+  }
+
+  .result-info {
+    min-width: 150px;
+  }
+
+  .result-price {
+    margin-left: 39px;
+  }
+
+  .add-cart-button,
+  .try-again-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .domain-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .domains-section-heading h2 {
+    font-size: 29px;
+  }
+
+  .domain-trust {
+    grid-template-columns: 1fr;
+    margin: 50px 18px;
+    padding: 0;
+  }
+
+  .domains-cta {
+    margin: 50px 18px;
+  }
+
+  .domains-cta h2 {
+    font-size: 28px;
+  }
+}
