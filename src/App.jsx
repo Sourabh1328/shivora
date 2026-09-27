@@ -2,35 +2,87 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home/Home";
 import Domains from "./pages/Domains/Domain";
+import Cart from "./pages/Cart/Cart";
+import Checkout from "./pages/Checkout/Checkout";
+
 
 function Hosting() {
-  return <h1>Shivora Hosting</h1>;
+  return (
+    <h1>
+      Shivora Hosting
+    </h1>
+  );
 }
+
 
 function Login() {
-  return <h1>Shivora Login</h1>;
+  return (
+    <h1>
+      Shivora Login
+    </h1>
+  );
 }
 
+
 function Dashboard() {
-  return <h1>Shivora Dashboard</h1>;
+  return (
+    <h1>
+      Shivora Dashboard
+    </h1>
+  );
 }
+
 
 function App() {
   return (
     <BrowserRouter>
+
       <Routes>
 
-        <Route path="/" element={<Home />} />
+        {/* Home */}
+        <Route
+          path="/"
+          element={<Home />}
+        />
 
-        <Route path="/domains" element={<Domains />} />
+        {/* Domains */}
+        <Route
+          path="/domains"
+          element={<Domains />}
+        />
 
-        <Route path="/hosting" element={<Hosting />} />
+        {/* Hosting */}
+        <Route
+          path="/hosting"
+          element={<Hosting />}
+        />
 
-        <Route path="/login" element={<Login />} />
+        {/* Login */}
+        <Route
+          path="/login"
+          element={<Login />}
+        />
 
-        <Route path="/dashboard" element={<Dashboard />} />
+        {/* Dashboard */}
+        <Route
+          path="/dashboard"
+          element={<Dashboard />}
+        />
+
+        {/* Cart */}
+        <Route
+          path="/cart"
+          element={<Cart />}
+        />
+
+        {/* Checkout */}
+        <Route
+          path="/checkout"
+          element={<Checkout />}
+        />
 
       </Routes>
+
     </BrowserRouter>
   );
 }

@@ -15,6 +15,47 @@ function Domain() {
   const [domain, setDomain] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [cart, setCart] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("shivora_cart") || "[]");
+    } catch {
+      return [];
+    }
+  });
+
+  // Add domain to cart
+  const addToCart = (domainName, price = 899) => {
+    const existingCart = JSON.parse(
+      localStorage.getItem("shivora_cart") || "[]"
+    );
+
+    const alreadyAdded = existingCart.some(
+      (item) => item.domain === domainName
+    );
+
+    if (alreadyAdded) {
+      alert("This domain is already in your cart.");
+      return;
+    }
+
+    const updatedCart = [
+      ...existingCart,
+      {
+        domain: domainName,
+        price: price,
+        period: "1 Year",
+      },
+    ];
+
+    localStorage.setItem(
+      "shivora_cart",
+      JSON.stringify(updatedCart)
+    );
+
+    setCart(updatedCart);
+
+    alert(`${domainName} added to cart.`);
+  };
 
   const searchDomain = async () => {
     const value = domain.trim().toLowerCase();
@@ -31,9 +72,15 @@ function Domain() {
     setResult(null);
 
     try {
-     const response = await fetch(
-  /api/domain-check?domain=${encodeURIComponent(value)}`
-);
+      const apiUrl =
+  window.location.hostname === "localhost"
+    ? `http://127.0.0.1:5000/api/domain/check?domain=${encodeURIComponent(
+        value
+      )}`
+    : `/api/domain-check?domain=${encodeURIComponent(value)}`;
+
+const response = await fetch(apiUrl);
+
       const data = await response.json();
 
       console.log("Domain API response:", data);
@@ -83,21 +130,41 @@ function Domain() {
 
         <nav>
           <a href="/">Home</a>
+
           <a href="/domains" className="active">
             Domains
           </a>
-          <a href="/hosting">Hosting</a>
-          <a href="#">Cloud</a>
-          <a href="#">Security</a>
+
+          <a href="/hosting">
+            Hosting
+          </a>
+
+          <a href="#">
+            Cloud
+          </a>
+
+          <a href="#">
+            Security
+          </a>
         </nav>
 
         <div className="domains-nav-actions">
-          <a href="/login">Login</a>
 
-          <a href="#" className="cart-button">
-            <ShoppingCart size={17} />
-            Cart
+          <a href="/login">
+            Login
           </a>
+
+          <a href="/cart" className="cart-button">
+  <ShoppingCart size={17} />
+  Cart
+
+  {cart.length > 0 && (
+    <span className="cart-count">
+      {cart.length}
+    </span>
+  )}
+</a>
+
         </div>
 
       </header>
@@ -165,7 +232,9 @@ function Domain() {
                   <XCircle size={22} />
 
                   <div>
-                    <strong>{result.message}</strong>
+                    <strong>
+                      {result.message}
+                    </strong>
                   </div>
                 </>
               )}
@@ -176,6 +245,7 @@ function Domain() {
                   <CheckCircle size={24} />
 
                   <div className="result-info">
+
                     <strong>
                       {result.domain}
                     </strong>
@@ -183,20 +253,34 @@ function Domain() {
                     <span>
                       ✓ This domain is available
                     </span>
+
                   </div>
 
                   <div className="result-price">
+
                     <strong>
                       ₹{result.price || 899}
                     </strong>
 
-                    <span>/year</span>
+                    <span>
+                      /year
+                    </span>
+
                   </div>
 
-                  <button className="add-cart-button">
+                  <button
+                    className="add-cart-button"
+                    onClick={() =>
+                      addToCart(
+                        result.domain,
+                        result.price || 899
+                      )
+                    }
+                  >
                     Add to Cart
                     <ShoppingCart size={17} />
                   </button>
+
                 </>
               )}
 
@@ -206,6 +290,7 @@ function Domain() {
                   <XCircle size={24} />
 
                   <div className="result-info">
+
                     <strong>
                       {result.domain}
                     </strong>
@@ -213,6 +298,7 @@ function Domain() {
                     <span>
                       This domain is already registered
                     </span>
+
                   </div>
 
                   <button
@@ -224,6 +310,7 @@ function Domain() {
                   >
                     Try Another
                   </button>
+
                 </>
               )}
 
@@ -238,7 +325,10 @@ function Domain() {
       <section className="domain-pricing">
 
         <div className="domains-section-heading">
-          <p>POPULAR EXTENSIONS</p>
+
+          <p>
+            POPULAR EXTENSIONS
+          </p>
 
           <h2>
             Choose Your Domain
@@ -247,6 +337,7 @@ function Domain() {
           <span>
             Simple pricing. No hidden surprises.
           </span>
+
         </div>
 
         <div className="domain-cards">
@@ -263,8 +354,15 @@ function Domain() {
             </h3>
 
             <div className="domain-price">
-              <strong>₹899</strong>
-              <span>/year</span>
+
+              <strong>
+                ₹899
+              </strong>
+
+              <span>
+                /year
+              </span>
+
             </div>
 
             <button
@@ -296,8 +394,15 @@ function Domain() {
             </h3>
 
             <div className="domain-price">
-              <strong>₹599</strong>
-              <span>/year</span>
+
+              <strong>
+                ₹599
+              </strong>
+
+              <span>
+                /year
+              </span>
+
             </div>
 
             <button>
@@ -319,8 +424,15 @@ function Domain() {
             </h3>
 
             <div className="domain-price">
-              <strong>₹999</strong>
-              <span>/year</span>
+
+              <strong>
+                ₹999
+              </strong>
+
+              <span>
+                /year
+              </span>
+
             </div>
 
             <button>
@@ -342,8 +454,15 @@ function Domain() {
             </h3>
 
             <div className="domain-price">
-              <strong>₹799</strong>
-              <span>/year</span>
+
+              <strong>
+                ₹799
+              </strong>
+
+              <span>
+                /year
+              </span>
+
             </div>
 
             <button>
@@ -365,6 +484,7 @@ function Domain() {
           <ShieldCheck size={28} />
 
           <div>
+
             <h3>
               Secure Registration
             </h3>
@@ -373,6 +493,7 @@ function Domain() {
               Your domain and account information
               stay protected.
             </p>
+
           </div>
 
         </div>
@@ -382,6 +503,7 @@ function Domain() {
           <Globe size={28} />
 
           <div>
+
             <h3>
               Global Domains
             </h3>
@@ -390,6 +512,7 @@ function Domain() {
               Register domains for your business
               anywhere in the world.
             </p>
+
           </div>
 
         </div>
